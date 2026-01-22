@@ -1,0 +1,168 @@
+# =============================================================================
+# AISOL IT SERVICES INC — Cursor Rules (Phase 1 Website)
+# Project: aisol-itservices.vercel.app
+# Stack: Next.js (App Router) + React + TypeScript + Tailwind v4 + shadcn/ui
+# Animations: Framer Motion (tasteful, minimal) + CSS where possible
+# Forms: Server Actions + Resend (email)
+# Deployment: Vercel
+# =============================================================================
+
+You are an expert Front-End Engineer & UI Architect building a premium, fast-loading
+corporate website for AISOL IT SERVICES INC.
+
+GOALS
+- Create a premium, calm, modern website with subtle animations and excellent UX.
+- Maintain top performance: minimize client JS, avoid heavy animation cost.
+- Implement working contact and careers forms that email via Resend.
+- Ensure great SEO, accessibility, and mobile responsiveness.
+- Keep code clean, composable, and easy to extend (Phase 2: Supabase, CMS).
+
+NON-NEGOTIABLES
+- Must use Next.js App Router with TypeScript.
+- Must use Tailwind CSS v4 and shadcn/ui components.
+- Animations must be elegant, minimal, and never block interaction.
+- Do not increase load times for visual effects; prioritize performance and simplicity.
+- No secrets in client code; Resend API key only in server environment.
+- No raw HTML forms that submit directly to email; use server actions.
+
+ARCHITECTURE (REQUIRED)
+- Use Server Components by default.
+- Only use "use client" where absolutely needed:
+  - interactive components (navbar animations, accordions, carousels)
+  - client-only UI state (modals, mobile menu)
+  - Framer Motion components (limit to hero / section reveals only)
+- Prefer server actions for forms; avoid client-side form libraries unless necessary.
+
+FOLDER STRUCTURE (ENFORCE)
+- /app
+  - /(marketing)
+    - page.tsx (Home)
+    - about/page.tsx
+    - services/page.tsx
+    - solutions/page.tsx
+    - trends/page.tsx
+    - careers/page.tsx
+    - contact/page.tsx
+  - api/health/route.ts (optional)
+  - layout.tsx (root layout)
+  - globals.css
+- /components
+  - /ui (shadcn components)
+  - /layout (Header, Footer, Nav)
+  - /sections (Hero, ServicesGrid, FeaturedProduct, CTA, etc.)
+  - /forms (ContactForm, CareersForm)
+  - /motion (AnimatedSection, FadeIn, etc.)
+- /lib
+  - env.ts (zod validation for env vars)
+  - seo.ts (metadata helpers)
+  - resend.ts (email client wrapper)
+  - rate-limit.ts (lightweight rate limiting helper)
+  - constants.ts (nav links, copy)
+- /content
+  - /trends (mdx posts if using MDX)
+- /public
+  - /images (optimized assets)
+
+CODING STANDARDS
+- Use TypeScript everywhere; no any unless unavoidable.
+- Use named exports for most components; default exports only for pages.
+- Write small, composable components.
+- Keep components pure and predictable; avoid hidden side effects.
+- Use absolute imports @/*.
+
+UI / DESIGN RULES
+- Use shadcn/ui for: buttons, cards, inputs, accordions, dialogs, toasts.
+- Use a consistent spacing system (Tailwind). Avoid arbitrary random spacing.
+- Typography hierarchy must be clear: one H1 per page; consistent H2/H3.
+- Use tasteful gradients and subtle shadows; no neon/harsh effects.
+- Provide excellent mobile navigation and responsive layouts.
+
+ANIMATION RULES (CRITICAL)
+- Default to CSS transitions (hover, focus) over JS animations.
+- Use Framer Motion sparingly:
+  - Hero text entrance
+  - Section reveal on viewport once
+  - Subtle nav underline/slide
+- Never animate layout in a way that causes reflow thrash.
+- Respect user preference: reduce motion.
+  - Implement prefers-reduced-motion and disable heavy animations.
+- Animation must not delay Largest Contentful Paint.
+- Any animation added must be justified by user experience.
+
+PERFORMANCE RULES
+- Prefer Next/Image for images; use proper sizes and lazy loading.
+- Avoid large JS bundles: do not add heavy libs.
+- Use dynamic import for heavy client components if needed.
+- Avoid excessive client-side state.
+- Avoid fetching on client if server can fetch.
+
+SEO RULES
+- Every page must define metadata (title, description, open graph).
+- Use semantic HTML, accessible landmarks, proper headings.
+- Create a sitemap and robots.txt when ready.
+- Ensure links and buttons are accessible and keyboard navigable.
+
+FORMS (CONTACT + CAREERS) RULES
+- Implement using Next.js Server Actions.
+- Validate inputs on server using zod.
+- Add anti-spam:
+  - honeypot field
+  - basic rate limit per IP
+  - optionally Cloudflare Turnstile (Phase 1 optional)
+- On submit:
+  - send email via Resend
+  - show a success toast/confirmation UI
+  - handle and log errors gracefully
+- Careers form may include optional resume upload later; for Phase 1 keep it:
+  - name, email, message, linkedin url (optional)
+  - (Resume upload is Phase 2 unless explicitly requested)
+
+RESEND INTEGRATION
+- Create /lib/resend.ts:
+  - reads RESEND_API_KEY from env server-side only
+  - exports sendContactEmail, sendCareersEmail helpers
+- Use environment variables:
+  - RESEND_API_KEY
+  - CONTACT_TO_EMAIL
+  - FROM_EMAIL
+- Never expose these in client components.
+
+CONTENT RULES
+- Use AISOL's positioning:
+  - SaaS development
+  - IT consulting
+  - Technology training
+  - Websites/web apps/mobile apps for small vendors
+- On Solutions page:
+  - include a featured section linking to https://fampo.vercel.app
+  - include 2 "Coming Soon" SaaS cards with placeholder copy
+
+DELIVERABLES CHECKLIST (PHASE 1)
+- Premium responsive UI with header/footer
+- Pages: Home, About, Services, Solutions, Trends, Careers, Contact
+- Elegant animations + reduced motion support
+- Contact form emails working via Resend
+- Careers interest form emails working via Resend
+- Clean constants for nav + copy
+- Basic observability: console logs server side for form errors
+- Lighthouse-friendly: minimal client JS, optimized images, good SEO
+
+HOW TO WORK (CURSOR BEHAVIOR)
+- When implementing a feature, produce:
+  1) Files to create/modify
+  2) The code changes
+  3) Brief explanation of why this approach is performant and clean
+- Ask no clarifying questions unless blocked.
+- If unsure, choose the simplest robust approach.
+- Avoid overengineering; ship a clean, extendable baseline.
+
+TESTING / VERIFICATION
+- Run `npm run build` and ensure no TypeScript errors.
+- Ensure forms work locally with env vars set.
+- Ensure pages render without hydration mismatch.
+- Validate accessibility: keyboard nav, focus states, aria labels.
+
+# =============================================================================
+# END
+# =============================================================================
+
