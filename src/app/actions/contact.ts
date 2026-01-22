@@ -72,8 +72,29 @@ export async function submitContactForm(
     };
   } catch (error) {
     console.error("Contact form error:", error);
+    
+    // Provide more specific error messages
+    if (error instanceof Error) {
+      // Check for common Resend errors
+      if (error.message.includes("API key")) {
+        return {
+          error: "Email service configuration error. Please contact the site administrator.",
+        };
+      }
+      if (error.message.includes("domain") || error.message.includes("verification")) {
+        return {
+          error: "Email domain not verified. Please contact the site administrator.",
+        };
+      }
+      if (error.message.includes("rate limit") || error.message.includes("quota")) {
+        return {
+          error: "Email service temporarily unavailable. Please try again later.",
+        };
+      }
+    }
+    
     return {
-      error: "Failed to send message. Please try again later.",
+      error: "Failed to send message. Please try again later or contact us directly.",
     };
   }
 }

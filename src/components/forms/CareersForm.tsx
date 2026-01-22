@@ -1,8 +1,6 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
-import { useFormStatus } from "react-dom";
-import { submitCareersForm } from "@/app/actions/careers";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,11 +9,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
+function SubmitButton({ isSubmitting }: { isSubmitting: boolean }) {
   return (
-    <Button type="submit" size="lg" disabled={pending} className="w-full sm:w-auto">
-      {pending ? (
+    <Button type="submit" size="lg" disabled={isSubmitting} className="w-full sm:w-auto">
+      {isSubmitting ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           Submitting...
@@ -28,15 +25,42 @@ function SubmitButton() {
 }
 
 export function CareersForm() {
-  const [state, formAction] = useActionState(submitCareersForm, null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
 
-  useEffect(() => {
-    if (state?.success) {
-      toast.success("Application submitted successfully! We'll review your information and get back to you soon.");
-    } else if (state?.error) {
-      toast.error(state.error);
+  async function handleSubmit(formData: FormData) {
+    setIsSubmitting(true);
+    setFieldErrors({});
+
+    try {
+      const response = await fetch("/api/careers", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        toast.success("Application submitted successfully! We'll review your information and get back to you soon.");
+        // Reset form
+        const form = document.querySelector('form') as HTMLFormElement;
+        form?.reset();
+      } else {
+        if (result.fieldErrors) {
+          setFieldErrors(result.fieldErrors);
+        } else if (result.error) {
+          toast.error(result.error);
+        } else {
+          toast.error("Failed to submit application. Please try again.");
+        }
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      toast.error("Failed to submit application. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
     }
-  }, [state]);
+  }
 
   return (
     <Card>
@@ -48,7 +72,7 @@ export function CareersForm() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form action={formAction} className="space-y-6">
+        <form action={handleSubmit} className="space-y-6">
           {/* Honeypot field - hidden from users */}
           <input
             type="text"
@@ -68,13 +92,12 @@ export function CareersForm() {
               name="name"
               type="text"
               required
-              defaultValue={state?.fieldErrors?.name ? "" : undefined}
-              aria-invalid={state?.fieldErrors?.name ? true : undefined}
-              aria-describedby={state?.fieldErrors?.name ? "name-error" : undefined}
+              aria-invalid={fieldErrors.name ? true : undefined}
+              aria-describedby={fieldErrors.name ? "name-error" : undefined}
             />
-            {state?.fieldErrors?.name && (
+            {fieldErrors.name && (
               <p id="name-error" className="text-sm text-destructive">
-                {state.fieldErrors.name[0]}
+                {fieldErrors.name[0]}
               </p>
             )}
           </div>
@@ -88,13 +111,12 @@ export function CareersForm() {
               name="email"
               type="email"
               required
-              defaultValue={state?.fieldErrors?.email ? "" : undefined}
-              aria-invalid={state?.fieldErrors?.email ? true : undefined}
-              aria-describedby={state?.fieldErrors?.email ? "email-error" : undefined}
+              aria-invalid={fieldErrors.email ? true : undefined}
+              aria-describedby={fieldErrors.email ? "email-error" : undefined}
             />
-            {state?.fieldErrors?.email && (
+            {fieldErrors.email && (
               <p id="email-error" className="text-sm text-destructive">
-                {state.fieldErrors.email[0]}
+                {fieldErrors.email[0]}
               </p>
             )}
           </div>
@@ -106,13 +128,12 @@ export function CareersForm() {
               name="linkedinUrl"
               type="url"
               placeholder="https://linkedin.com/in/yourprofile"
-              defaultValue={state?.fieldErrors?.linkedinUrl ? "" : undefined}
-              aria-invalid={state?.fieldErrors?.linkedinUrl ? true : undefined}
-              aria-describedby={state?.fieldErrors?.linkedinUrl ? "linkedinUrl-error" : undefined}
+              aria-invalid={fieldErrors.linkedinUrl ? true : undefined}
+              aria-describedby={fieldErrors.linkedinUrl ? "linkedinUrl-error" : undefined}
             />
-            {state?.fieldErrors?.linkedinUrl && (
+            {fieldErrors.linkedinUrl && (
               <p id="linkedinUrl-error" className="text-sm text-destructive">
-                {state.fieldErrors.linkedinUrl[0]}
+                {fieldErrors.linkedinUrl[0]}
               </p>
             )}
           </div>
@@ -127,18 +148,17 @@ export function CareersForm() {
               required
               rows={6}
               placeholder="Tell us about yourself, your experience, and why you're interested in joining AISOL..."
-              defaultValue={state?.fieldErrors?.message ? "" : undefined}
-              aria-invalid={state?.fieldErrors?.message ? true : undefined}
-              aria-describedby={state?.fieldErrors?.message ? "message-error" : undefined}
+              aria-invalid={fieldErrors.message ? true : undefined}
+              aria-describedby={fieldErrors.message ? "message-error" : undefined}
             />
-            {state?.fieldErrors?.message && (
+            {fieldErrors.message && (
               <p id="message-error" className="text-sm text-destructive">
-                {state.fieldErrors.message[0]}
+                {fieldErrors.message[0]}
               </p>
             )}
           </div>
 
-          <SubmitButton />
+          <SubmitButton isSubmitting={isSubmitting} />
         </form>
       </CardContent>
     </Card>

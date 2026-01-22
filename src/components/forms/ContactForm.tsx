@@ -1,8 +1,7 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
-import { submitContactForm } from "@/app/actions/contact";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,11 +18,10 @@ const SERVICE_OPTIONS = [
   { value: "web-mobile", label: "Web & Mobile Development" },
 ];
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
+function SubmitButton({ isSubmitting }: { isSubmitting: boolean }) {
   return (
-    <Button type="submit" size="lg" disabled={pending} className="w-full sm:w-auto">
-      {pending ? (
+    <Button type="submit" size="lg" disabled={isSubmitting} className="w-full sm:w-auto">
+      {isSubmitting ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           Sending...
@@ -36,15 +34,42 @@ function SubmitButton() {
 }
 
 export function ContactForm() {
-  const [state, formAction] = useActionState(submitContactForm, null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
 
-  useEffect(() => {
-    if (state?.success) {
-      toast.success("Message sent successfully! We'll get back to you soon.");
-    } else if (state?.error) {
-      toast.error(state.error);
+  async function handleSubmit(formData: FormData) {
+    setIsSubmitting(true);
+    setFieldErrors({});
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        toast.success("Message sent successfully! We'll get back to you soon.");
+        // Reset form
+        const form = document.querySelector('form') as HTMLFormElement;
+        form?.reset();
+      } else {
+        if (result.fieldErrors) {
+          setFieldErrors(result.fieldErrors);
+        } else if (result.error) {
+          toast.error(result.error);
+        } else {
+          toast.error("Failed to send message. Please try again.");
+        }
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      toast.error("Failed to send message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
     }
-  }, [state]);
+  }
 
   return (
     <Card>
@@ -55,7 +80,7 @@ export function ContactForm() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form action={formAction} className="space-y-6">
+        <form action={handleSubmit} className="space-y-6">
           {/* Honeypot field - hidden from users */}
           <input
             type="text"
@@ -75,13 +100,12 @@ export function ContactForm() {
               name="name"
               type="text"
               required
-              defaultValue={state?.fieldErrors?.name ? "" : undefined}
-              aria-invalid={state?.fieldErrors?.name ? true : undefined}
-              aria-describedby={state?.fieldErrors?.name ? "name-error" : undefined}
+              aria-invalid={fieldErrors.name ? true : undefined}
+              aria-describedby={fieldErrors.name ? "name-error" : undefined}
             />
-            {state?.fieldErrors?.name && (
+            {fieldErrors.name && (
               <p id="name-error" className="text-sm text-destructive">
-                {state.fieldErrors.name[0]}
+                {fieldErrors.name[0]}
               </p>
             )}
           </div>
@@ -95,13 +119,12 @@ export function ContactForm() {
               name="email"
               type="email"
               required
-              defaultValue={state?.fieldErrors?.email ? "" : undefined}
-              aria-invalid={state?.fieldErrors?.email ? true : undefined}
-              aria-describedby={state?.fieldErrors?.email ? "email-error" : undefined}
+              aria-invalid={fieldErrors.email ? true : undefined}
+              aria-describedby={fieldErrors.email ? "email-error" : undefined}
             />
-            {state?.fieldErrors?.email && (
+            {fieldErrors.email && (
               <p id="email-error" className="text-sm text-destructive">
-                {state.fieldErrors.email[0]}
+                {fieldErrors.email[0]}
               </p>
             )}
           </div>
@@ -112,13 +135,12 @@ export function ContactForm() {
               id="company"
               name="company"
               type="text"
-              defaultValue={state?.fieldErrors?.company ? "" : undefined}
-              aria-invalid={state?.fieldErrors?.company ? true : undefined}
-              aria-describedby={state?.fieldErrors?.company ? "company-error" : undefined}
+              aria-invalid={fieldErrors.company ? true : undefined}
+              aria-describedby={fieldErrors.company ? "company-error" : undefined}
             />
-            {state?.fieldErrors?.company && (
+            {fieldErrors.company && (
               <p id="company-error" className="text-sm text-destructive">
-                {state.fieldErrors.company[0]}
+                {fieldErrors.company[0]}
               </p>
             )}
           </div>
@@ -129,13 +151,12 @@ export function ContactForm() {
               id="phone"
               name="phone"
               type="tel"
-              defaultValue={state?.fieldErrors?.phone ? "" : undefined}
-              aria-invalid={state?.fieldErrors?.phone ? true : undefined}
-              aria-describedby={state?.fieldErrors?.phone ? "phone-error" : undefined}
+              aria-invalid={fieldErrors.phone ? true : undefined}
+              aria-describedby={fieldErrors.phone ? "phone-error" : undefined}
             />
-            {state?.fieldErrors?.phone && (
+            {fieldErrors.phone && (
               <p id="phone-error" className="text-sm text-destructive">
-                {state.fieldErrors.phone[0]}
+                {fieldErrors.phone[0]}
               </p>
             )}
           </div>
@@ -146,9 +167,8 @@ export function ContactForm() {
               id="serviceInterest"
               name="serviceInterest"
               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              defaultValue={state?.fieldErrors?.serviceInterest ? "" : undefined}
-              aria-invalid={state?.fieldErrors?.serviceInterest ? true : undefined}
-              aria-describedby={state?.fieldErrors?.serviceInterest ? "serviceInterest-error" : undefined}
+              aria-invalid={fieldErrors.serviceInterest ? true : undefined}
+              aria-describedby={fieldErrors.serviceInterest ? "serviceInterest-error" : undefined}
             >
               {SERVICE_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -156,9 +176,9 @@ export function ContactForm() {
                 </option>
               ))}
             </select>
-            {state?.fieldErrors?.serviceInterest && (
+            {fieldErrors.serviceInterest && (
               <p id="serviceInterest-error" className="text-sm text-destructive">
-                {state.fieldErrors.serviceInterest[0]}
+                {fieldErrors.serviceInterest[0]}
               </p>
             )}
           </div>
@@ -172,18 +192,17 @@ export function ContactForm() {
               name="message"
               required
               rows={6}
-              defaultValue={state?.fieldErrors?.message ? "" : undefined}
-              aria-invalid={state?.fieldErrors?.message ? true : undefined}
-              aria-describedby={state?.fieldErrors?.message ? "message-error" : undefined}
+              aria-invalid={fieldErrors.message ? true : undefined}
+              aria-describedby={fieldErrors.message ? "message-error" : undefined}
             />
-            {state?.fieldErrors?.message && (
+            {fieldErrors.message && (
               <p id="message-error" className="text-sm text-destructive">
-                {state.fieldErrors.message[0]}
+                {fieldErrors.message[0]}
               </p>
             )}
           </div>
 
-          <SubmitButton />
+          <SubmitButton isSubmitting={isSubmitting} />
         </form>
       </CardContent>
     </Card>
