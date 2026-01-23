@@ -390,3 +390,5 @@ Phase 1 provides:
 - All constants are centralized for easy content updates
 - SEO metadata can be customized per page using `generateMetadata()`
 
+
+
