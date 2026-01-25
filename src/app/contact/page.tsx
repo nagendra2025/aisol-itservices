@@ -1,7 +1,7 @@
 import { AnimatedSection } from "@/components/motion/AnimatedSection";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { generateMetadata } from "@/lib/seo";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Clock } from "lucide-react";
 import { COMPANY_INFO } from "@/lib/constants";
 
 export const metadata = generateMetadata({
@@ -77,15 +77,32 @@ export default function Contact() {
                           <p className="text-muted-foreground">{COMPANY_INFO.location}</p>
                         </div>
                       </div>
+
+                      <div className="flex items-start gap-4">
+                        <Clock className="mt-1 h-5 w-5 text-primary" />
+                        <div>
+                          <p className="font-medium">Business Hours</p>
+                          <p className="text-muted-foreground">
+                            Monday - Friday: 9:00 AM - 5:00 PM EST
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            Saturday & Sunday: Closed
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
                   <div className="rounded-lg border border-border/40 bg-muted/30 p-6">
-                    <h4 className="mb-3 font-semibold">Response Time</h4>
-                    <p className="text-sm text-muted-foreground">
-                      We typically respond to inquiries within 24-48 hours during
-                      business days. For urgent matters, please mention it in your
-                      message.
+                    <h4 className="mb-3 font-semibold">Email Support</h4>
+                    <p className="mb-3 text-justify text-sm text-muted-foreground">
+                      For service inquiries and support, please contact us via email. 
+                      We are committed to providing prompt assistance and typically 
+                      respond to all email inquiries within 2 hours during business hours.
+                    </p>
+                    <p className="text-justify text-sm text-muted-foreground">
+                      For urgent matters or time-sensitive requests, please mention 
+                      it in your message, and we will prioritize your inquiry accordingly.
                     </p>
                   </div>
 

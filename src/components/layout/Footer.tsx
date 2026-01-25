@@ -2,7 +2,8 @@ import Link from "next/link";
 import { NAV_LINKS, COMPANY_INFO } from "@/lib/constants";
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
+  // Company registered in January 2025
+  const copyrightYear = 2025;
 
   return (
     <footer className="border-t border-border/40 bg-background" role="contentinfo">
@@ -79,7 +80,7 @@ export function Footer() {
 
         <div className="mt-12 border-t border-border/40 pt-8 text-center text-sm text-muted-foreground">
           <p>
-            © {currentYear} {COMPANY_INFO.name}. All rights reserved.
+            © {copyrightYear} {COMPANY_INFO.name}. All rights reserved.
           </p>
         </div>
       </div>

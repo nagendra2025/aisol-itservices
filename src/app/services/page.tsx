@@ -33,7 +33,7 @@ export default function Services() {
       </section>
 
       {/* SaaS Development */}
-      <section className="py-16 md:py-24">
+      <section id="saas-development" className="py-16 md:py-24 scroll-mt-24">
         <div className="container px-4">
           <div className="mx-auto max-w-5xl">
             <AnimatedSection>
@@ -80,7 +80,7 @@ export default function Services() {
       </section>
 
       {/* IT Consulting */}
-      <section className="border-y border-border/40 bg-muted/20 py-16 md:py-24">
+      <section id="consulting" className="border-y border-border/40 bg-muted/20 py-16 md:py-24 scroll-mt-24">
         <div className="container px-4">
           <div className="mx-auto max-w-5xl">
             <AnimatedSection>
@@ -127,7 +127,7 @@ export default function Services() {
       </section>
 
       {/* Technology Training */}
-      <section className="py-16 md:py-24">
+      <section id="training" className="py-16 md:py-24 scroll-mt-24">
         <div className="container px-4">
           <div className="mx-auto max-w-5xl">
             <AnimatedSection>
@@ -176,7 +176,7 @@ export default function Services() {
       </section>
 
       {/* Web & Mobile Development */}
-      <section className="border-y border-border/40 bg-muted/20 py-16 md:py-24">
+      <section id="web-mobile" className="border-y border-border/40 bg-muted/20 py-16 md:py-24 scroll-mt-24">
         <div className="container px-4">
           <div className="mx-auto max-w-5xl">
             <AnimatedSection>

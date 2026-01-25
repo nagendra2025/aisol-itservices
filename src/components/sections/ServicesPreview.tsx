@@ -32,7 +32,7 @@ export function ServicesPreview() {
                     {service.description}
                   </CardDescription>
                   <Link
-                    href="/services"
+                    href={`/services#${service.id}`}
                     className="inline-flex items-center text-sm font-medium text-primary transition-colors hover:underline group-hover:text-primary/80"
                   >
                     Learn more
