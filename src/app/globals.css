@@ -148,6 +148,36 @@
     background-clip: text;
   }
 
+  /* Text alignment and justification */
+  /* Justify all prose paragraphs */
+  .prose p,
+  [class*="prose"] p {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  /* Justify paragraph text in content sections (but not centered text) */
+  section p.text-muted-foreground:not(.text-center),
+  section p.text-foreground:not(.text-center),
+  section p.text-lg:not(.text-center),
+  section p.text-base:not(.text-center) {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  /* Card descriptions should also be justified */
+  [class*="CardDescription"]:not(.text-center) {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  /* Ensure text in cards is justified */
+  .card p:not(.text-center),
+  [class*="Card"] p:not(.text-center) {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
   /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     *,

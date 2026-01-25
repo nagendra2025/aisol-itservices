@@ -36,7 +36,7 @@ export const SERVICES = [
 ] as const;
 
 export const CREDIBILITY_STATS = [
-  { label: "20+ Years Experience", value: "20+" },
+  { label: "25+ Years Experience", value: "25+" },
   { label: "AI & Cloud Focused", value: "AI" },
   { label: "Enterprise & SMB Solutions", value: "Enterprise" },
 ] as const;

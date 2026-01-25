@@ -40,19 +40,19 @@ export default function About() {
             </AnimatedSection>
             <AnimatedSection delay={0.1}>
               <div className="prose prose-lg dark:prose-invert max-w-none">
-                <p className="mb-4 text-lg text-muted-foreground">
+                <p className="mb-4 text-lg text-muted-foreground text-justify">
                   {COMPANY_INFO.name} is a forward-thinking technology company
                   dedicated to transforming businesses through intelligent digital
-                  solutions. With over 20 years of combined experience, we
+                  solutions. With over 25 years of combined experience, we
                   specialize in SaaS development, IT consulting, technology
                   training, and web & mobile development.
                 </p>
-                <p className="mb-4 text-lg text-muted-foreground">
+                <p className="mb-4 text-lg text-muted-foreground text-justify">
                   Based in {COMPANY_INFO.location}, we serve clients across
                   North America, helping small businesses and enterprises alike
                   leverage cutting-edge technology to achieve their goals.
                 </p>
-                <p className="text-lg text-muted-foreground">
+                <p className="text-lg text-muted-foreground text-justify">
                   Our mission is to bridge the gap between complex technology
                   and business needs, delivering solutions that are not just
                   functional, but transformative.
@@ -77,19 +77,70 @@ export default function About() {
             </AnimatedSection>
             <AnimatedSection delay={0.1}>
               <div className="prose prose-lg dark:prose-invert max-w-none">
-                <p className="mb-4 text-lg text-muted-foreground">
+                <p className="mb-4 text-lg text-muted-foreground text-justify">
                   AISOL was founded with a clear vision: to democratize access to
                   enterprise-grade technology solutions. We believe that every
                   business, regardless of size, deserves access to intelligent,
                   scalable, and cost-effective digital platforms.
                 </p>
-                <p className="mb-4 text-lg text-muted-foreground">
+                <div className="mb-6 rounded-lg border border-border/40 bg-card p-6">
+                  <h3 className="mb-4 text-2xl font-semibold">About the Founder</h3>
+                  <p className="mb-3 text-base text-muted-foreground text-justify">
+                    <strong className="text-foreground">Nagendra Kumar Adapala</strong> brings over 25 years of 
+                    extensive experience in software development, IT consulting, and technology leadership. 
+                    With a strong educational foundation—holding a Master of Engineering in Computer Science 
+                    from BITS, Pilani, Rajasthan, and a Bachelor of Technology in Computer Science Engineering 
+                    from S.V. University, Tirupati, Andhra Pradesh—Nagendra has built a reputation for delivering 
+                    scalable, intelligent digital solutions that drive real business value.
+                  </p>
+                  <p className="mb-3 text-base text-muted-foreground text-justify">
+                    His distinguished career includes working with top multinational corporations such as Philips, 
+                    Oracle, TCS, and Hewlett Packard, as well as several innovative startups in India. 
+                    In Canada, Nagendra has worked with prestigious clients including Citi and ScotiaBank, 
+                    delivering enterprise-grade solutions for the financial services sector. His expertise spans 
+                    SaaS platform development, cloud architecture, AI/ML integration, and modern web technologies. 
+                    Throughout his career, he has successfully led numerous projects from conception to deployment, 
+                    helping businesses transform their operations through innovative technology solutions.
+                  </p>
+                  <p className="mb-4 text-base text-muted-foreground text-justify">
+                    As the founder of AISOL IT SERVICES, Nagendra combines deep technical knowledge with 
+                    business acumen, ensuring that every solution not only meets technical standards but 
+                    also aligns with client objectives and delivers measurable ROI. His commitment to 
+                    continuous learning and staying at the forefront of technology trends, combined with 
+                    his diverse experience across global markets and industries, enables AISOL to offer 
+                    cutting-edge solutions that help clients stay competitive in today's digital landscape.
+                  </p>
+                  <div className="mt-4">
+                    <a
+                      href="https://www.linkedin.com/in/nagendrakumaradapala/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-primary hover:underline"
+                    >
+                      <span>View LinkedIn Profile</span>
+                      <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <p className="mb-4 text-lg text-muted-foreground text-justify">
                   Our founder envisioned a company that combines deep technical
                   expertise with business acumen, creating solutions that not
                   only work but drive real business value. This vision continues
                   to guide every project we undertake.
                 </p>
-                <p className="text-lg text-muted-foreground">
+                <p className="text-lg text-muted-foreground text-justify">
                   We see technology as an enabler of innovation, not just a tool.
                   Every platform we build, every consultation we provide, and
                   every training session we conduct is designed to empower our
