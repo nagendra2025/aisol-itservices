@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   ...genMeta(),
-  metadataBase: new URL("https://aisol-itservices.vercel.app"),
+  metadataBase: new URL("https://aisol-itservices.com"),
   icons: {
     icon: "/favicon.ico",
   },

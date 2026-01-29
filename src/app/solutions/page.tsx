@@ -106,7 +106,7 @@ export default function Solutions() {
                   </div>
                   <Button asChild size="lg" className="w-full sm:w-auto group">
                     <Link
-                      href="https://fampo.vercel.app"
+                      href="https://fampo-marketing.vercel.app"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

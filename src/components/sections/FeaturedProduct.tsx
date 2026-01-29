@@ -50,7 +50,7 @@ export function FeaturedProduct() {
               </ul>
               <Button asChild size="lg" className="w-full sm:w-auto">
                 <Link
-                  href="https://fampo.vercel.app"
+                  href="https://fampo-marketing.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group"

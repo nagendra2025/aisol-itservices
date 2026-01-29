@@ -11,7 +11,7 @@ export function generateMetadata({
   description = "Engineering Intelligent Digital Platforms. SaaS development, IT consulting, technology training, and web & mobile solutions.",
   path = "",
 }: SEOProps = {}): Metadata {
-  const url = `https://aisol-itservices.vercel.app${path}`;
+  const url = `https://aisol-itservices.com${path}`;
   const fullTitle = path ? `${title} | AISOL IT SERVICES` : title;
 
   return {
