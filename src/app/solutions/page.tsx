@@ -72,7 +72,7 @@ export default function Solutions() {
                       <div>
                         <p className="font-medium">Shared Calendar</p>
                         <p className="text-sm text-muted-foreground">
-                          Keep everyone in sync with a shared family calendar. Never miss important events with automated WhatsApp & SMS reminders.
+                          Keep everyone in sync with a shared family calendar. Never miss important events with automated SMS reminders.
                         </p>
                       </div>
                     </div>
