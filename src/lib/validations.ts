@@ -28,6 +28,3 @@ export const careersFormSchema = z.object({
 export type CareersFormData = z.infer<typeof careersFormSchema>;
 
 
-
-
-

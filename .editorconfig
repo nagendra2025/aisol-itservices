@@ -1,0 +1,11 @@
+# EditorConfig: https://editorconfig.org
+# Ensures consistent line endings (LF) across Windows, Mac, and Linux
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false
