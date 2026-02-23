@@ -10,7 +10,7 @@ import { ArrowRight, Users, Briefcase, Heart, Shield, GraduationCap, Award, Doll
 export const metadata = generateMetadata({
   title: "Careers",
   description:
-    "Join AISOL IT SERVICES INC. Explore career opportunities in SaaS development, IT consulting, and technology. Based in Burlington, ON.",
+    "Join AISOL IT SERVICES INC. Explore career opportunities in SaaS development, IT consulting, and technology. Based in Burlington, ON, Canada.",
   path: "/careers",
 });
 

@@ -44,7 +44,7 @@ export const CREDIBILITY_STATS = [
 export const COMPANY_INFO = {
   name: "AISOL IT SERVICES INC",
   tagline: "Engineering Intelligent Digital Platforms",
-  location: "Burlington, ON",
+  location: "Burlington, ON, Canada",
   email: "aisol2k25@gmail.com",
 } as const;
 
