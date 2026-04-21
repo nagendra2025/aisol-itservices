@@ -83,13 +83,13 @@ export default function About() {
                   business, regardless of size, deserves access to intelligent,
                   scalable, and cost-effective digital platforms.
                 </p>
-                <div className="mb-6 rounded-lg border border-border/40 bg-card p-6">
+                <div className="mb-6 rounded-lg border border-border/40 bg-card p-6 text-center">
                   <h3 className="mb-4 text-2xl font-semibold">About the Founder</h3>
                   <div className="mb-6">
                     <p className="mb-6 text-base text-muted-foreground">
                       <strong className="text-foreground">Nagendra Kumar Adapala</strong>, Director, AISOL IT Services Inc., Canada
                     </p>
-                    <p className="indent-8 text-base text-muted-foreground text-justify">
+                    <p className="text-base text-muted-foreground">
                       He brings over 25 years of extensive experience in software development, IT consulting, and technology leadership. 
                       With a strong educational foundation—holding a Master of Engineering in Computer Science 
                       from BITS, Pilani, Rajasthan, and a Bachelor of Technology in Computer Science Engineering 
@@ -97,7 +97,7 @@ export default function About() {
                       scalable, intelligent digital solutions that drive real business value.
                     </p>
                   </div>
-                  <p className="mb-3 indent-8 text-base text-muted-foreground text-justify">
+                  <p className="mb-3 text-base text-muted-foreground">
                     His distinguished career includes working with top multinational corporations such as Philips, 
                     Oracle, TCS, and Hewlett Packard, as well as several innovative startups in India. 
                     In Canada, Nagendra has worked with prestigious clients including Citi and ScotiaBank, 
@@ -106,7 +106,7 @@ export default function About() {
                     Throughout his career, he has successfully led numerous projects from conception to deployment, 
                     helping businesses transform their operations through innovative technology solutions.
                   </p>
-                  <p className="mb-4 indent-8 text-base text-muted-foreground text-justify">
+                  <p className="mb-4 text-base text-muted-foreground">
                     As the founder of AISOL IT Services Inc., Nagendra combines deep technical knowledge with 
                     business acumen, ensuring that every solution not only meets technical standards but 
                     also aligns with client objectives and delivers measurable ROI. His commitment to 
@@ -114,7 +114,7 @@ export default function About() {
                     his diverse experience across global markets and industries, enables AISOL to offer 
                     cutting-edge solutions that help clients stay competitive in today's digital landscape.
                   </p>
-                  <div className="mt-4">
+                  <div className="mt-4 flex justify-center">
                     <a
                       href="https://www.linkedin.com/in/nagendrakumaradapala/"
                       target="_blank"
