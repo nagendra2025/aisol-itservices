@@ -1,4 +1,5 @@
 import { AnimatedSection } from "@/components/motion/AnimatedSection";
+import { FounderPortrait } from "@/components/sections/FounderPortrait";
 import { COMPANY_INFO } from "@/lib/constants";
 import { generateMetadata } from "@/lib/seo";
 import { MapPin, Target, Lightbulb, Heart } from "lucide-react";
@@ -84,6 +85,7 @@ export default function About() {
                   scalable, and cost-effective digital platforms.
                 </p>
                 <div className="mb-6 rounded-lg border border-border/40 bg-card p-6 text-center">
+                  <FounderPortrait />
                   <h3 className="mb-4 text-2xl font-semibold">About the Founder</h3>
                   <div className="mb-6">
                     <p className="mb-6 text-base text-muted-foreground">
