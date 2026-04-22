@@ -44,7 +44,7 @@ export default function About() {
                 <p className="mb-4 text-lg text-muted-foreground text-justify">
                   {COMPANY_INFO.name} is a forward-thinking technology company
                   dedicated to transforming businesses through intelligent digital
-                  solutions. With over 25 years of combined experience, we
+                  solutions. With over two decades plus of combined experience, we
                   specialize in SaaS development, IT consulting, technology
                   training, and web & mobile development.
                 </p>
@@ -88,11 +88,15 @@ export default function About() {
                   <FounderPortrait />
                   <h3 className="mb-4 text-2xl font-semibold">About the Founder</h3>
                   <div className="mb-6">
+                    <p className="mb-1 text-base text-muted-foreground">
+                      <strong className="text-foreground">Nagendra Kumar Adapala</strong>
+                      , M.E., (Computer Science), BITS, Pilani
+                    </p>
                     <p className="mb-6 text-base text-muted-foreground">
-                      <strong className="text-foreground">Nagendra Kumar Adapala</strong>, Director, AISOL IT Services Inc., Canada
+                      Director, AISOL IT Services Inc., {COMPANY_INFO.location}
                     </p>
                     <p className="text-base text-muted-foreground">
-                      He brings over 25 years of extensive experience in software development, IT consulting, and technology leadership. 
+                      He brings over two decades plus of extensive experience in embedded domain testing, application software development, testing, IT consulting, and technology leadership. 
                       With a strong educational foundation—holding a Master of Engineering in Computer Science 
                       from BITS, Pilani, Rajasthan, and a Bachelor of Technology in Computer Science Engineering 
                       from S.V. University, Tirupati, Andhra Pradesh—Nagendra has built a reputation for delivering 
